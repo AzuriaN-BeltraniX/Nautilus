@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{instruction}}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()" color="danger">
+        <ion-icon slot="icon-only" name="close-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Datos del paciente -->
+  <div *ngIf="create === false" class="ion-padding ion-text-center">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="4" class="ion-align-self-center">
+          <img src="{{baseUrl}}/upload/medicos/{{paciente.img || noImage}}"
+            (click)="changeProperties()" class="avatarBtn">
+        </ion-col>
+        <ion-col size="8" class="ion-align-self-center ion-text-start ion-padding-start">
+          <h1 class="ion-no-margin">{{paciente.nombre}}</h1>
+          <ion-text style="font-size: 14px;">
+            <span style="font-weight: 300; color: var(--ion-color-medium-tint);">Edad: </span>
+            <span style="font-weight: 400; color: var(--ion-color-primary);">{{paciente.edad}}</span>
+            <br>
+            <span style="font-weight: 300; color: var(--ion-color-medium-tint);">Email: </span>
+            <span style="font-weight: 400; color: var(--ion-color-primary);">{{paciente.email}}</span>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- Formulario para editar datos: -->
+  <div class="ion-padding ion-margin-top">
+    <form *ngIf="create === false" [formGroup]="updatePatient">
+      <ion-item>
+        <ion-icon slot="start" name="person-circle-outline" color="secondary"></ion-icon>
+        <ion-label position="stacked" color="primary" style="opacity: 0.6;">Nombre:</ion-label>
+        <ion-input type="text" formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="person-circle-outline" color="secondary"></ion-icon>
+        <ion-label position="stacked" color="primary" style="opacity: 0.6;">Edad:</ion-label>
+        <ion-input type="number" formControlName="edad"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="person-circle-outline" color="secondary"></ion-icon>
+        <ion-label position="stacked" color="primary" style="opacity: 0.6;">Email:</ion-label>
+        <ion-input type="text" formControlName="email"></ion-input>
+      </ion-item>
+    </form>
+
+    <form *ngIf="create === true" [formGroup]="createPatient">
+      <ion-item>
+        <ion-icon slot="start" name="person-circle-outline" color="secondary"></ion-icon>
+        <ion-label position="stacked" color="primary" style="opacity: 0.6;">Nombre:</ion-label>
+        <ion-input type="text" formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="person-circle-outline" color="secondary"></ion-icon>
+        <ion-label position="stacked" color="primary" style="opacity: 0.6;">Edad:</ion-label>
+        <ion-input type="number" min="1" max="2" formControlName="edad"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="person-circle-outline" color="secondary"></ion-icon>
+        <ion-label position="stacked" color="primary" style="opacity: 0.6;">Email:</ion-label>
+        <ion-input type="text" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="person-circle-outline" color="secondary"></ion-icon>
+        <ion-label position="stacked" color="primary" style="opacity: 0.6;">Médico a asignar:</ion-label>
+        <ion-input type="text" formControlName="doctor"></ion-input>
+      </ion-item>
+    </form>
+  </div>
+
+  <!-- Botones de guardar -->
+  <div class="ion-text-center">
+    <ion-button *ngIf="create === false" (click)="actualizarPaciente()"
+        color="tertiary" fill="outline" shape="round" class="ion-padding">
+      <ion-icon slot="start" name="save-outline"></ion-icon>
+      Guardar
+    </ion-button>
+    <ion-button *ngIf="create === true" (click)="registrarPaciente()"
+        color="primary" fill="outline" shape="round" class="ion-padding">
+      <ion-icon slot="start" name="add-outline"></ion-icon>
+      Registrar
+    </ion-button>
+  </div>
+</ion-content>

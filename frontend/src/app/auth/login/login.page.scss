@@ -1,0 +1,22 @@
+ion-list {
+    margin-top: 0rem !important;
+    padding-top: 0rem !important;
+}
+
+.avatar {
+    border-radius: 100%;
+    width: 25%;
+}
+
+.btnChangeUser {
+    cursor: pointer;
+    color: var(--ion-color-medium-tint);
+    font-weight: 500;
+    transition: ease .1s;
+}
+.btnChangeUser:hover {
+    color: var(--ion-color-dark-tint);
+}
+.btnChangeUser:active {
+    color: var(--ion-color-dark-tint);
+}

@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Pacientes Registrados</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="crearPaciente()" color="primary">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-refresher *ngIf="updateList === true" slot="fixed" (ionRefresh)="actualizarLista_Pacientes($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-searchbar animated placeholder="Busca pacientes..." class="ion-padding"
+  (ionChange)="busqueda($event)"></ion-searchbar>
+
+  <ion-item>
+    <ion-label style="font-weight: 600; opacity: 50%;" color="secondary">Total registrados:</ion-label>
+    <ion-badge slot="end" color="light">{{totalRegistrados}}</ion-badge>
+  </ion-item>
+
+  <div *ngIf="loading === true" class="ion-text-center ion-margin-start ion-margin-end">
+    <ion-card>
+      <ion-card-content class="ion-margin">
+        <ion-spinner color="primary"></ion-spinner>
+        <p class="ion-padding-top">{{loaderText_Card}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-list *ngFor="let paciente of pacientes">
+    <ion-item-sliding>
+      <ion-item-options side="start">
+        <ion-item-option color="secondary" (click)="editarPaciente(paciente)">
+          <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="{{baseUrl}}/upload/pacientes/{{paciente.img || noImage}}" />
+        </ion-avatar>
+        <ion-label>
+          <h2 style="font-weight: 600;">{{paciente.nombre}}</h2>
+          <h3>
+            <span style="opacity: 0.5; font-weight: 500;">Edad: </span>
+            <span style="opacity: 0.7; color: #00a591 !important;">{{paciente.edad}}</span>
+            <br>
+            <span style="opacity: 0.5; font-weight: 500;">Email: </span>
+            <span style="opacity: 0.7; color: #00a591 !important;">{{paciente.email}}</span>
+          </h3>
+        </ion-label>
+      </ion-item>
+  
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="eliminarPaciente(paciente)">
+          <ion-icon name="trash-bin-outline" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <div *ngIf="completeListener === true" class="ion-padding-top">
+    <p class="ion-text-center" style="opacity: 50%;">{{listenerText}}</p>
+  </div>
+
+  <ion-infinite-scroll position="bottom" (ionInfinite)="reloadPatients(+10)" class="ion-margin-top">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando más pacientes...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

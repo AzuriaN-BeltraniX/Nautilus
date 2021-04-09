@@ -1,0 +1,29 @@
+<ion-list class="ion-margin">
+
+  <!-- Información de la cuenta -->
+  <ion-avatar style="margin: auto;">
+    <img src="{{baseUrl}}/upload/users/{{dataLocalService.usuario.img || noImage}}">
+  </ion-avatar>
+  <h2 class="ion-text-center" style="margin-bottom: 5px !important;">{{dataLocalService.usuario.nombre}}</h2>
+  <p class="ion-text-center" style="opacity: 50%; margin-top: 2px !important;">{{dataLocalService.usuario.email}}</p>
+
+  <!-- Opciones -->
+  <div class="ion-padding">
+    <!-- Botón de Cuenta -->
+    <div>
+      <ion-button color="primary" expand="block" shape="round" fill="outline" (click)="accountPage()"
+      class="ion-margin-start ion-margin-end">
+        Mi cuenta
+      </ion-button>
+    </div>
+
+    <!-- Botón de registro -->
+    <div class="ion-margin-top">
+      <ion-button color="danger" expand="block" shape="round" fill="outline" (click)="logout()"
+      class="ion-margin-start ion-margin-end">
+        Cerrar sesión
+      </ion-button>
+    </div>
+  </div>
+  
+</ion-list>

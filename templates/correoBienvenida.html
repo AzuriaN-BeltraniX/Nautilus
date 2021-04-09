@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>¡Hola, {{nombreSeparado}}! Nautilus te espera...</title>
+        <style>
+            body {
+                margin-left: 10%;
+                margin-right: 10%;
+            }
+            a {
+                text-decoration: none;
+                font-weight: 700;
+                color: #222428;
+                transition: .2s ease-in-out;
+            }
+            a:hover {
+                color: #1aae9c;
+                transition: .1s ease-in-out;
+            }
+
+            .header {
+                color: #f4f5f8;
+                background-color: #00a591;
+                padding: 10px 20px;
+                text-align: left;
+            }
+            .container {
+                color: #222428;
+                background-color: #f4f5f8;
+                padding: 25px 50px;
+                margin: 0px 8px;
+            }
+            .description {
+                padding-top: 10px;
+            }
+            .footer {
+                color: #222428;
+                background-color: #d7d8da;
+                padding: 15px 50px;
+                margin: 0px 8px;
+                text-align: right;
+                font-weight: 600;
+                opacity: 0.7;
+
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <div class="header">
+                <h1>
+                    <span style="font-weight: 700;">Nautilus</span>
+                    <span style="opacity: 0.5; font-weight: 300 !important; font-size: 14px;">by AzuriaN BeltraniX</span>
+                </h1>
+            </div>
+        </header>
+
+        <div class="container">    
+            <h3>
+                ¡Tu cuenta ha sido creada con éxito, {{nombre}}! <br><br>
+                <span style="opacity: 0.7;">
+                    Puedes continuar con el uso de la aplicación.
+                </span>
+            </h3>
+
+            <p class="description">
+                Nautilus es una aplicación raiz desarrollada por 
+                <a href="http://azurianbeltranix.com">AzuriaN BeltraniX</a>,
+                para brindar codígo a aplicaciones creadas en Midiat Corp.
+            </p>
+        </div>
+
+        <footer>
+            <div class="footer">
+                <p>AzuriaN BeltraniX | {{year}}</p>
+            </div>
+        </footer>
+    </body>
+</html>

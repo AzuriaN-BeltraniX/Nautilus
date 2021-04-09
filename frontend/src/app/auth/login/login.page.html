@@ -1,0 +1,105 @@
+<app-header titulo="Inicia Sesión"></app-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Muestra si no hay un usuario en el local Storage: -->
+  <div *ngIf="formRecent === false">
+    <!-- Formulario -->
+    <form  [formGroup]="loginForm" (ngSubmit)="login()">
+      <ion-list class="ion-margin-start ion-margin-end ion-margin-bottom">
+        <h1>Ingresa tu correo electrónico</h1>
+        <ion-item class="ion-margin-top">
+          <ion-icon slot="start" color="success" name="at-outline"></ion-icon>
+          <!-- <ion-input type="text" placeholder="nautilusapp@ejemplo.com" formControlName="email" [value]=usuarioService.emailValue></ion-input> -->
+          <ion-input type="text" placeholder="nautilusapp@ejemplo.com" autocomplete="off"
+            formControlName="email"></ion-input>
+        </ion-item>
+    
+        <div class="ion-padding-top">
+          <h1>Ingresa tu contraseña</h1>
+          <ion-item class="ion-margin-top">
+            <ion-icon slot="start" color="warning" name="key-outline"></ion-icon>
+            <ion-input type="password" placeholder="Tu contraseña" autocomplete="off" min="8"
+            formControlName="password"></ion-input>
+          </ion-item>
+        </div>
+      </ion-list>
+  
+      <!-- Funciones -->
+      <!-- <div style="display: inline-flex;" class="ion-padding-start">
+        <ion-checkbox color="primary" formControlName="remember"></ion-checkbox>
+        <span style="margin-left: 10px; opacity: 50%;">Recuérdame</span>
+      </div> -->
+    </form>
+  
+    <!-- Botones de inicio sesión -->
+    <div class="ion-margin ion-padding">
+      <div class="ion-margin-start ion-padding-end">
+        <ion-button color="secondary" expand="block" shape="round" fill="outline" (click)="login()"
+        class="ion-margin-start ion-margin-end">
+          Iniciar sesión
+        </ion-button>
+      </div>
+  
+      <!-- Botón pata iniciar sesión con Google: -->
+      <!-- <div class="ion-margin-start ion-padding-end ion-padding-top">
+        <ion-button color="medium" expand="block" shape="round" fill="outline"
+        class="ion-margin-start ion-margin-end">
+          <ion-icon name="logo-google" color="medium"></ion-icon>
+          <span class="ion-text-capitalize ion-margin-start">Google</span>
+        </ion-button>
+      </div> -->
+    </div>
+  </div>
+
+  <!-- Muestra si ya hay un usuario en el Local Storage -->
+  <div *ngIf="formRecent === true" class="ion-text-center">
+
+    <!-- Mensaje de bienvenida -->
+    <h1 class="ion-padding-bottom">¡Bienvenido de nuevo!</h1>
+
+    <!-- Datos del usuario: -->
+    <img class="avatar" [src]="userImg">
+    <!-- <h3 class="ion-text-center">{{dataLocalService.userName}}</h3> -->
+    <h3 class="ion-text-center">{{this.dataLocalService.usuario.nombre}}</h3>
+    <span class="btnChangeUser" (click)="changeUser()">Cambiar usuario</span>
+
+    <form  [formGroup]="recentLoginForm" (ngSubmit)="login()">
+      <ion-list class="ion-margin-start ion-margin-end ion-margin-bottom">
+        <div class="ion-padding-top">
+          <ion-item class="ion-margin-top">
+            <ion-icon slot="start" color="warning" name="key-outline"></ion-icon>
+            <ion-input type="password" placeholder="Contraseña" autocomplete="off" min="8"
+            formControlName="password"></ion-input>
+          </ion-item>
+        </div>
+      </ion-list>
+      <div class="ion-padding-bottom ion-padding-end ion-text-right">
+        <ion-text color="medium" (click)="resetPwd()">
+          Olvidé la contraseña
+        </ion-text>
+      </div>
+    </form>
+
+    <!-- Boton para iniciar sesión -->
+    <div class="ion-margin ion-padding">
+      <div class="ion-margin-start ion-padding-end">
+        <ion-button color="secondary" expand="block" shape="round" fill="outline" (click)="login()"
+        class="ion-margin-start ion-margin-end">
+          Iniciar sesión
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="tryLogin === true" class="ion-text-center ion-margin-start ion-margin-end">
+    <ion-card>
+      <ion-card-content class="ion-margin">
+        <ion-spinner color="primary"></ion-spinner>
+        <p class="ion-padding-top">Iniciando Sesión</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
+</ion-content>

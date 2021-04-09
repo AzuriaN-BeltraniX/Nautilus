@@ -1,0 +1,14 @@
+.btnChangeImg {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--ion-color-medium-tint);
+    font-weight: 500;
+    transition: ease .1s;
+}
+.btnChangeImg:hover {
+    color: var(--ion-color-dark-tint);
+}
+.btnChangeImg:active {
+    color: var(--ion-color-dark-tint);
+}

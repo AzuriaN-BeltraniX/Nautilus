@@ -1,0 +1,18 @@
+<!-- Caja de elementos -->
+<div class="headerContainer">
+
+  <!-- Botón de cualquier acción -->
+  <div class="containerActions">
+    <ion-buttons slot="start">
+      <ion-button (click)="url('/home')">
+        <ion-icon slot="icon-only" color="dark" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+
+  <!-- Caja del título de la página mostrada -->
+  <div class="containerTitle">
+    <p class="title">{{titulo}}</p>
+  </div>
+
+</div>

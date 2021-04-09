@@ -1,0 +1,99 @@
+<!-- Header -->
+<app-header titulo="Registro"></app-header>
+
+<ion-content class="ion-padding">
+
+  <h1 class="ion-margin-start">¡Regístrate en Nautilus!</h1>
+
+  <!-- Formulario -->
+  <form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="crearUsuario()">
+    <ion-list class="ion-margin">
+      <!-- Campo del nombre -->
+      <ion-item>
+        <ion-icon slot="start" color="primary" name="person-outline"></ion-icon>
+        <ion-input type="text" placeholder="Nombre" formControlName="nombre"></ion-input>
+      </ion-item>
+      <!-- Mensaje de validación -->
+      <div class="alertContainer" *ngIf="campoNoValido('nombre')">
+        <p class="textAlertValidations">
+          <span> El nombre es obligatorio. </span>
+          <small>El nombre debe tener un mínimo de 3 carácteres.</small>
+        </p>
+      </div>
+
+      <!-- Campo del Correo Electrónico -->
+      <ion-item class="ion-margin-top">
+        <ion-icon slot="start" color="secondary" name="at-outline"></ion-icon>
+        <ion-input type="text" placeholder="Ingresa tu correo electrónico" formControlName="email"></ion-input>
+      </ion-item>
+      <!-- Mensaje de validación -->
+      <div class="alertContainer" *ngIf="campoNoValido('email')">
+        <p class="textAlertValidations">
+          <span> El correo es obligatorio. </span>
+          <small>Debes ingresar un correo válido.</small>
+        </p>
+      </div>
+
+      <!-- Campo de la contraseña -->
+      <ion-item class="ion-margin-top">
+        <ion-icon slot="start" color="tertiary" name="key-outline"></ion-icon>
+        <ion-input type="password" placeholder="Contraseña" min="8" formControlName="password"></ion-input>
+      </ion-item>
+      <!-- Mensaje de validación -->
+      <div class="alertContainer" *ngIf="campoNoValido('password')">
+        <p class="textAlertValidations">
+          <span> La contraseña es obligatoria. </span>
+          <small>La contraseña debe tener un mínimo de 8 carácteres.</small>
+        </p>
+      </div>
+
+      <!-- Campo de confirmación de la contraseña -->
+      <ion-item class="ion-margin-top">
+        <ion-icon slot="start" color="medium" name="refresh-outline"></ion-icon>
+        <ion-input type="password" placeholder="Confirma la constraseña" min="8" formControlName="password2"></ion-input>
+      </ion-item>
+      <!-- Mensaje de validación -->
+      <div class="alertContainer" *ngIf="passNoCoincide()">
+        <p class="textAlertValidations">
+          <span>La contraseña no coincide. </span>
+          <small>Asegúrate de escribir bien la contraseña.</small>
+        </p>
+      </div>
+    </ion-list>
+  
+    <!-- Funciones -->
+    <div style="display: inline-flex;" class="ion-padding-start">
+      <ion-checkbox color="primary" style="top: -1px;" formControlName="terminos"></ion-checkbox>
+      <span style="margin-left: 10px; opacity: 50%; font-size: 12px;">Acepto los términos y condiciones</span>
+    </div>
+  
+    <!-- Botones de inicio sesión -->   
+    <div class="ion-margin ion-padding">
+      <div class="ion-margin-start ion-padding-end">
+        <ion-button color="primary" expand="block" shape="round" fill="outline" (click)="crearUsuario()"
+        class="ion-margin-start ion-margin-end">
+          Regístrate
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Mensaje de validación del checkbox "Terminos y Condiciones" -->
+    <div class="alertContainer" *ngIf="!registerForm.get('terminos').value">
+      <ion-item detail>
+        <p class="textAlertValidations" id="terminos">
+          <span> Debes aceptar los términos y condiciones.</span>
+        </p>
+      </ion-item>
+    </div>
+  </form>
+
+  <div *ngIf="tryLogin === true" class="ion-text-center ion-margin-start ion-margin-end">
+    <ion-card>
+      <ion-card-content class="ion-margin">
+        <ion-spinner color="primary"></ion-spinner>
+        <p class="ion-padding-top">Estamos creando tu cuenta</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

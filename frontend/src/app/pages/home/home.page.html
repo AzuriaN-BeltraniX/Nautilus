@@ -1,0 +1,50 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">NautilusApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Bienvenida si el usuario no ha iniciado sesión -->
+  <div *ngIf="validSession === false">
+    <div class="ion-margin">
+      <h1>Bienvenido a NautilusApp</h1>
+      <p>Por favor inicia sesión o regístrate.</p>
+    </div>
+  
+    <!-- Boton de inicio de sesión -->
+    <div class="ion-margin ion-padding">
+      <div class="ion-margin-start ion-padding-end">
+        <ion-button color="primary" expand="block" shape="round" fill="outline" routerLink="/login"
+        class="ion-margin-start ion-margin-end">
+          Iniciar sesión
+        </ion-button>
+      </div>
+  
+      <!-- Botón de registro -->
+      <div class="ion-margin-start ion-padding-end ion-padding-top">
+        <ion-button color="medium" expand="block" shape="round" fill="outline" routerLink="/register" (click)="register()"
+        class="ion-margin-start ion-margin-end">
+          Regístrate
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="validSession === true">
+    <div class="ion-margin">
+      <h1>Bienvenido a NautilusApp</h1>
+    </div>
+
+    <ion-card class="ion-margin">
+      <ion-card-header>
+        <ion-card-subtitle class="ion-text-center">Verificando sesión</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content class="ion-text-center">
+        <ion-spinner color="primary"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

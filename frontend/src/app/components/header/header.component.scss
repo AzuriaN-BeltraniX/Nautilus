@@ -1,0 +1,28 @@
+.headerContainer {
+    display: inline-flex;
+    margin-top: 1rem;
+    // background-color: aquamarine;
+}
+.containerActions {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.containerTitle {
+    position: absolute;
+    right: 0;
+    width: 77.5%;
+    padding: 0.85rem 0rem;
+    align-self: center;
+    background: linear-gradient(45deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+.title {
+    color: var(--ion-color-light);
+    opacity: 90%;
+    margin: 0rem !important;
+    padding-right: 2rem;
+    text-align: right;
+    font-size: 1.25rem;
+    font-weight: 300;
+}

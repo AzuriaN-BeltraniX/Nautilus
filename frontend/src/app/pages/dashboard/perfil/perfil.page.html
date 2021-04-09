@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/dashboard"></ion-back-button>
+  </ion-buttons>
+    
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="ion-padding ion-text-center">    
+    <img src="{{baseUrl}}/upload/users/{{dataLocalService.usuario.img || noImage}}" style="border-radius: 100%; max-width: 50%;">
+  </div>
+  <span class="btnChangeImg" (click)="changeImg()">Cambiar imagen</span>
+
+  <div class="ion-padding">    
+    <form [formGroup]="userData">
+      <ion-item>
+        <ion-icon slot="start" name="person-circle-outline" color="secondary"></ion-icon>
+        <ion-label position="stacked" color="primary" style="opacity: 0.6;">Nombre:</ion-label>
+          <ion-input type="text" formControlName="nombre">
+          </ion-input>
+      </ion-item>
+      <ion-item style="padding-top: 20px;">
+        <ion-icon slot="start" name="at-outline" color="secondary"></ion-icon>
+        <ion-label position="stacked" color="primary" style="opacity: 0.6;">Email:</ion-label>
+          <ion-input type="email" formControlName="email">
+          </ion-input>
+      </ion-item>
+    </form>
+  </div>
+
+  <div class="ion-text-center">
+    <ion-button (click)="actualizarDatos()" color="tertiary" fill="outline" shape="round" class="ion-padding">
+      <ion-icon slot="start" name="save-outline"></ion-icon>
+      Guardar
+    </ion-button>
+  </div>
+
+</ion-content>

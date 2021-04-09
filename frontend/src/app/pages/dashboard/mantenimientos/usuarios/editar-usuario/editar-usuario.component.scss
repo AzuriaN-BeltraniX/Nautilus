@@ -1,0 +1,26 @@
+.btnChangeImg {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--ion-color-medium-tint);
+    font-weight: 500;
+    transition: ease .1s;
+}
+.btnChangeImg:hover {
+    color: var(--ion-color-dark-tint);
+}
+.btnChangeImg:active {
+    color: var(--ion-color-dark-tint);
+}
+
+.avatarBtn {
+    border-radius: 100%;
+    max-width: 100%;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+}
+.avatarBtn_Admin {
+    border: solid 5px var(--ion-color-warning);
+    border-radius: 100%;
+    max-width: 100%;
+    box-shadow: 0px 0px 10px 2px rgba(255, 196, 9, .5);
+}

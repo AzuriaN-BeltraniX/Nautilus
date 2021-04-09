@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Modifica a un médico</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()" color="danger">
+        <ion-icon slot="icon-only" name="close-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Datos del usuario -->
+  <div class="ion-padding ion-text-center">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="4" class="ion-align-self-center">
+          <img src="{{baseUrl}}/upload/medicos/{{medico.img || noImage}}"
+            (click)="changeProperties()" class="avatarBtn">
+        </ion-col>
+        <ion-col size="8" class="ion-align-self-center ion-text-start ion-padding-start">
+          <h1 class="ion-no-margin">{{medico.nombre}}</h1>
+          <ion-text style="font-size: 14px;">
+            <span style="font-weight: 300; color: var(--ion-color-medium-tint);">Cédula Profesional:</span>
+            <br>
+            <span style="font-weight: 400; color: var(--ion-color-primary);">{{medico.cedulaProf}}</span>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- Formulario para editar datos: -->
+  <div class="ion-padding ion-margin-top">
+    <form [formGroup]="doctorData">
+      <ion-item>
+        <ion-icon slot="start" name="person-circle-outline" color="secondary"></ion-icon>
+        <ion-label position="stacked" color="primary" style="opacity: 0.6;">Nombre:</ion-label>
+          <ion-input type="text" formControlName="nombre"></ion-input>
+      </ion-item>
+    </form>
+  </div>
+
+  <!-- Botones de guardar -->
+  <div class="ion-text-center">
+    <ion-button (click)="actualizarDatos()" color="tertiary" fill="outline" shape="round" class="ion-padding">
+      <ion-icon slot="start" name="save-outline"></ion-icon>
+      Guardar
+    </ion-button>
+  </div>
+</ion-content>

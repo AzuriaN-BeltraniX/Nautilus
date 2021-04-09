@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="dashboard"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Menu</ion-title>
+
+    <ion-buttons slot="end" (click)="presentPopover($event)">
+      <ion-avatar>
+        <!-- <img src="../../../assets/img/stan-lee.jpg" /> -->
+        <ion-img [src]="userImage" style="width: 60%; height: 60%; margin-top: 12px;"></ion-img>
+      </ion-avatar>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+

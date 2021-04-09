@@ -1,0 +1,8 @@
+{
+  "name": "nautilusApp",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{title}}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()" color="danger">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="flag === 'register'">
+    <h1>Escribe los datos del nuevo almacén a continuación:</h1>
+  
+    <!-- Formulario para editar datos: -->
+    <div class="ion-padding ion-margin-top">
+      <form [formGroup]="stockData">
+        <ion-item>
+          <ion-icon slot="start" name="person-circle-outline" color="secondary"></ion-icon>
+          <ion-label position="stacked" color="primary" style="opacity: 0.6;">Nombre:</ion-label>
+            <ion-input type="text" formControlName="nombre"></ion-input>
+        </ion-item>
+      </form>
+    </div>
+  
+    <!-- Boton de crear -->
+    <div class="ion-text-center">
+      <ion-button (click)="crearAlmacen()"
+        color="tertiary" fill="outline" shape="round" class="ion-padding">
+        <ion-icon slot="start" name="add-outline"></ion-icon>
+        Registrar almacén
+      </ion-button>
+    </div>
+  </div>
+
+  <div *ngIf="flag === 'update'">
+
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="3" class="ion-text-left ion-align-self-center">
+            <img src="{{baseUrl}}/upload/almacenes/{{img}}" style="border-radius: 100%;"/>
+        </ion-col>
+        <ion-col size="9">
+          <h1>{{nombre}}</h1>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <!-- Formulario para editar datos: -->
+    <div class="ion-padding ion-margin-top">
+      <form [formGroup]="stockData">
+        <ion-item>
+          <ion-icon slot="start" name="person-circle-outline" color="secondary"></ion-icon>
+          <ion-label position="stacked" color="primary" style="opacity: 0.6;">Nombre:</ion-label>
+            <ion-input type="text" formControlName="nombre"></ion-input>
+        </ion-item>
+      </form>
+    </div>
+  
+    <!-- Boton de crear -->
+    <div class="ion-text-center">
+      <ion-button (click)="actualizarAlmacen()"
+        color="tertiary" fill="outline" shape="round" class="ion-padding">
+        <ion-icon slot="start" name="add-outline"></ion-icon>
+        Actualizar almacén
+      </ion-button>
+    </div>
+  </div>
+
+  <div *ngIf="flag === 'products'">
+    <ion-text color="medium" class="ion-text-center">
+      <h1>{{stockName}}</h1>
+    </ion-text>
+
+    <ion-list *ngFor="let producto of productosEnAlmacen">
+      <ion-item-sliding>
+  
+        <ion-item-options side="start">
+          <!-- <ion-item-option color="secondary" (click)="editarAlmacen(almacen)"> -->
+          <ion-item-option color="secondary">
+            <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        
+        <ion-item>
+          <!-- <ion-avatar slot="start">
+            <img src="{{baseUrl}}/upload/productos/{{producto.img || noImage}}" />
+          </ion-avatar> -->
+          <ion-label>
+            <h2 style="font-weight: 600;">{{producto.nombre}}</h2>
+          </ion-label>
+
+          <ion-note slot="end" color="secondary">
+            <span style="font-weight: 600; font-size: 15px;">
+              {{producto.cantidad}}
+            </span>
+          </ion-note>
+        </ion-item>
+        
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+</ion-content>
