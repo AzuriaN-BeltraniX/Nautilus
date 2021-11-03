@@ -79,7 +79,11 @@ Ejecutar desde carpeta raiz
 
 * ## **v2.0.2 - _"Solución a errores por actualización de librerías":_**
     * Incluye:
-        * Modificación y actualización de algunas líneas de código que solucionan algunos errores surgidos por la actualización de las librerías en la versión anterior 
+        * Modificación y actualización de algunas líneas de código que solucionan algunos errores surgidos por la actualización de las librerías en la versión anterior.
+
+* ## **v2.0.3 - _"Páginas de confirmación":_**
+    * Incluye:
+        * Adición de página que informa del correcto funcionamiento de los servicios de NautilusApi en [la página de alojamiento](www.azbelnix.xyz/api).
 
 ---
 
