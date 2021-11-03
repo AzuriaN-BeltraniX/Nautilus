@@ -28,7 +28,7 @@ const dbConnection = async (host) => {
     } else if (host === 'onlineHost') {
         await mongoose.connect(
             (`${onlineHost}`), 
-            { useNewUrlParser: true, useUnifiedTopology: true, }, (err) => {
+            { useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
                 // Si hay error, muestra error en consola
                 if (err) throw err;
         
@@ -38,11 +38,6 @@ const dbConnection = async (host) => {
         );
     };
 };
-
-// EnsureIndex Solution
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
 
 // Modulos exportados
 module.exports = {

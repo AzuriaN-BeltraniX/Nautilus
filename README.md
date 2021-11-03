@@ -77,6 +77,10 @@ Ejecutar desde carpeta raiz
         * Arrelgo estético a la página informativa que se muestra al entrar a la página alojada donde corre este servidor.
         * Actualización de librerías a su verisión mas reciente del día 2 de noviembre de 2021.
 
+* ## **v2.0.2 - _"Solución a errores por actualización de librerías":_**
+    * Incluye:
+        * Modificación y actualización de algunas líneas de código que solucionan algunos errores surgidos por la actualización de las librerías en la versión anterior 
+
 ---
 
 > **NautilusApi** by AzuriaN BeltraniX 2020 - 2021
