@@ -1,6 +1,6 @@
 {
   "name": "nautilus_api",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "description": "Aplicacion madre multiproposito para dar servicio a comercios de distintos giros.",
   "main": "index.js",
   "scripts": {

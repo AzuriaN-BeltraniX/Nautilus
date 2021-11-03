@@ -51,7 +51,7 @@ app.use('/api/info', require('./routes/acciones')); // Ejecutar acciones en Naut
 /** ToDo: MODIFICAR ESTA RUTA */
 // Cualquier ruta diferente se direcciona a index del frontend(home)
 app.get('*', function(req, res, next) {
-    res.sendFile(path.resolve('public/index.html'));
+    res.sendFile(path.resolve('public/nautilusApi.html'));
 });
 
 // Esuchando el puerto 3000.
