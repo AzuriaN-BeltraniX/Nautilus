@@ -169,7 +169,8 @@ const resetPwd_Email = (req = request, res = response) => {
                                         res.json({
                                             ok: true,
                                             header: '¡Perfecto!',
-                                            msg: 'Correo para cambiar contraseña enviado correctamente.'
+                                            msg: 'Correo para cambiar contraseña enviado correctamente.',
+                                            code: code
                                         });
                                     };
                                 });

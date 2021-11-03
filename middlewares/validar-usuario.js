@@ -19,28 +19,35 @@ const validarUsuario = (req = request, res = response) => {
             /** PRUEBA: Imprime en consola los datos decodificados. */
             // console.log(decoded);
 
-            // ... Carga el usuario dentro del Token,
-            const user = decoded.user;
-            // ... Busca el usuario en la base de datos,
-            const userDB = Usuario.findOne(user);
-
-            // ... Si no existe el usuario en la base de datos, entonces retorna una respuesta de rechazo:
-            if(!userDB) {
-                return reject(
+            // ... Verifica el 'decoded':
+            if (decoded === undefined) {
+                reject(
                     res.status(404).json({
-                        ok: false,
-                        msg: 'El token no es válido, inicia sesión de nuevo.',
-                        error: err
+                        ok: false
                     })
                 );
             } else {
-                return resolve(
-                    res.status(200).json({
-                        ok: true,
-                        user
-                    })
-                );
-            }
+                // ... Busca el usuario en la base de datos,
+                const userDB = Usuario.findOne(decoded.user);
+    
+                // ... Si no existe el usuario en la base de datos, entonces retorna una respuesta de rechazo:
+                if(!userDB) {
+                    reject(
+                        res.status(404).json({
+                            ok: false,
+                            msg: 'El token no es válido, inicia sesión de nuevo.',
+                            error: err
+                        })
+                    );
+                } else {
+                    return resolve(
+                        res.status(200).json({
+                            ok: true,
+                            user: decoded.user
+                        })
+                    );
+                };
+            };
         });
     });
 };

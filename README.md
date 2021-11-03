@@ -70,6 +70,13 @@ Ejecutar desde carpeta raiz
             * _Correos de notificación sobre acciones realizadas en un perfil_
         * Adición de una página principal donde se informa de un desarrollo de una interfaz para manejar todos los sistemas ya mencionados.
 
+* ## **v2.0.1 - _"Modificaciones y actualizaciones":_**
+    * Incluye:
+        * Modificación de algunos mensajes de respuesta a peticiones HTTP que recibe el usuario y/o desarrollador al realizar acciones dentro del API.
+        * Arreglo de algunos detalles en la función que valida algún usuario que requiera validación de sus datos.
+        * Arrelgo estético a la página informativa que se muestra al entrar a la página alojada donde corre este servidor.
+        * Actualización de librerías a su verisión mas reciente del día 2 de noviembre de 2021.
+
 ---
 
 > **NautilusApi** by AzuriaN BeltraniX 2020 - 2021

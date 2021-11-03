@@ -57,6 +57,96 @@ const obtenerUsuarios = async(req = request, res = response) => {
 };
 
 // Controlador para crear usuarios:
+const crearUsuarios_per = async(req = request, res = response) => {
+    /** PRUEBA: Muestra un mensaje en la petición indicando que el servicio funciona. */
+    // console.log('Creando usuario...');
+
+    // Captura datos
+    const { nombre, email, password } = req.body;
+
+    // Promesa...
+    try {
+        // Busca email en el registro, para evitar duplciados.
+        const existeEmail = await Usuario.findOne({ email });
+
+        if (existeEmail) { // Si existe el email, entonces...
+            return res.status(400).json({
+                ok: false,
+                header: '¡Hey!',
+                msg: 'El correo que ingresaste ya está registrado, intenta con uno diferente.'
+            }); // Retorna el menssaje de error.
+        };
+
+        // Creación del Usuario
+        const usuario = new Usuario(req.body); // Crea un usuario
+
+        // Encriptación de la contraseña.
+        const salt = bcrypt.genSaltSync(10); // Genera la encriptación
+        usuario.password = bcrypt.hashSync(password, salt); // Determina el parámetro a encriptar
+
+        // Verificación de contraseña segura mediante expresión regular:
+        /** Desc. RegExp: Contraseña de 8 a 16 caracteres, incluyendon dígitos, símbolos y letras Mayus-Minus. */
+        const pattern = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040\u005f])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/g;
+        const isValid = pattern.test(toString(usuario.password));
+
+        // Si la contraseña no cumple el RegExp, entonces:
+        if (!isValid) {
+            // Retorna mensaje de error con la indicación de solución:
+            res.status(406).json({
+                ok: false,
+                header: '¡Hey!',
+                msg: 'La contraseña debe incluir al menos minúsculas o mayúsculas, números y símbolos. Recuerda incluir mínimo 8 caracteres.'
+            });
+        } else {
+            // Guarda al usuario creado
+            await usuario.save();
+    
+            // Si el correo y contraseñas son válidas, entonces genera un TOKEN (JWT):
+            const token = await generarJWT(usuario, '30d'); // Expira en 30 días
+    
+            // Envía el correo de bienvenida al email del usuario registrado:
+            welcome_Email(email, nombre).then(async resp => {
+                /** PRUEBA: Imprime en pantalla la respuesta del correo de bienvenida. */
+                // console.log(resp);
+    
+                if (resp['ok'] === true) {
+                    // Respuesta de la petición al guardar usuario:
+                    res.status(200).json({
+                        ok: true, // Creación exitosa!!!
+                        ok_SendEmail: true, // Email enviado correctamente
+                        message_SendEmail: {
+                            header: resp['header'],
+                            msg: resp['msg']
+                        }, // Mensaje de éxito al enviar un correo electrónico
+                        usuario, // Muestra los datos del usuario creado
+                        token // Muestra el TOKEN generado.
+                    });
+                } else {                
+                    // Respuesta de la petición al guardar usuario:
+                    res.status(200).json({
+                        ok: true, // Creación exitosa!!!
+                        ok_SendEmail: false, // Email no enviado...
+                        message_SendEmail: {
+                            header: resp['header'],
+                            msg: resp['msg']
+                        }, // Mensaje de error al enviar un correo electrónico
+                        usuario, // Muestra los datos del usuario creado
+                        token // Muestra el TOKEN generado.
+                    });
+                }
+            });
+        };
+    } catch(error) { // Si no se puede crear usuario, entonces...
+        console.log(error); // Imprime el error
+        res.status(500).json({
+            ok: false,
+            header: 'Esto no debería pasar...',
+            msg: 'Reporte este error al administrador.'
+        }); // Retorna el mensaje de error.
+    }
+};
+
+// Controlador para crear usuarios:
 const crearUsuarios = async(req = request, res = response) => {
     /** PRUEBA: Muestra un mensaje en la petición indicando que el servicio funciona. */
     // console.log('Creando usuario...');
@@ -83,7 +173,7 @@ const crearUsuarios = async(req = request, res = response) => {
         // Encriptación de la contraseña.
         const salt = bcrypt.genSaltSync(10); // Genera la encriptación
         usuario.password = bcrypt.hashSync(password, salt); // Determina el parámetro a encriptar
-        
+
         // Guarda al usuario creado
         await usuario.save();
 
@@ -295,7 +385,7 @@ const actualizarPwd_Usuario = async (req = request, res = response, )  => {
             });
         } else {
             // ... si el token es correcto, entonces extrae el ID de usuario almacenado:
-            const userID = results.decoded.data.userID;
+            const userID = results.decoded.user.userID;
             /** PRUEBA: Imprime el ID extraído. */
             // console.log(userID);
 
@@ -311,7 +401,7 @@ const actualizarPwd_Usuario = async (req = request, res = response, )  => {
             // ... si existe el usuario entonces realiza lo siguiente;
             } else {
                 // ... verifica la llave dentro del TOKEN, si es correcta, entonces cambia la contraseña;
-                if (results.decoded.data.key === process.env.VALID_SPECIALTOKEN) {
+                if (results.decoded.user.key === process.env.VALID_SPECIALTOKEN) {
                     // ... de la contraseña actual, reemplázala por una nueva contraseña encriptada,
                     usuario.password = bcrypt.hashSync(newUserPwd, 10);
                     usuario.tmpCode = '';
@@ -334,13 +424,13 @@ const actualizarPwd_Usuario = async (req = request, res = response, )  => {
                                     return res.status(200).json({
                                         ok: true,
                                         header: '¡Excelente!',
-                                        msg: 'La contraseña fue actualizada correctamente, puedes comprobarlo con un correo electrónico que te hemos enviado.'
+                                        msg: 'La contraseña fue actualizada correctamente, compruébalo con el correo electrónico que te hemos enviado.'
                                     });
                                 } else {
                                     return res.status(200).json({
                                         ok: true,
                                         header: '¡Excelente!',
-                                        msg: 'La contraseña fue actualizada correctamente, pero no se ha podido notificar la acción a tu correo electrónico.'
+                                        msg: 'La contraseña fue actualizada correctamente, aunque no se logró notificar esta acción a tu correo electrónico registrado.'
                                     });
                                 };
                             });

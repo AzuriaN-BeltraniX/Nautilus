@@ -73,7 +73,7 @@ const validarCodigo = async(req = request, res = response) => {
                     key: process.env.VALID_SPECIALTOKEN
                 }, 300); // Expira en 5 minutos.
 
-                return res.status(406).json({
+                return res.status(202).json({
                     ok: true,
                     header: '¡Código validado exitosamente!',
                     token: token
@@ -89,7 +89,7 @@ const validarCodigo = async(req = request, res = response) => {
         }); // Retorna el mensaje de error.
     }
 
-    // ... genera el token almacentando en Payload el los datos del usuario extraído
+    // ... genera el token almacenando en Payload el los datos del usuario extraído
 };
 
 // Controlador para registrar un nuevo código:
